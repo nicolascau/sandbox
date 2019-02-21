@@ -72,7 +72,7 @@ public class ElasticService {
 
         GetResponse response = client.prepareGet(index, type, id).get();
 
-        logger.info("putData - response.isSourceEmplty() " +response.isSourceEmpty());
+        logger.info("putData - response.isSourceEmpty() " +response.isSourceEmpty());
 
         if (!response.isSourceEmpty()) {
             data = response.getSourceAsMap();
@@ -138,8 +138,6 @@ public class ElasticService {
             jsonObject = jsonBuilder().startObject();
             for (Map.Entry<String, Object> entry : parameters.entrySet()) {
                 if (entry.getValue() instanceof String) {
-                    jsonObject.field(entry.getKey(), entry.getValue());
-                } else if (entry.getValue() instanceof Date) {
                     jsonObject.field(entry.getKey(), entry.getValue());
                 } else {
                     logger.warn("Type non reconnu", entry.getValue());

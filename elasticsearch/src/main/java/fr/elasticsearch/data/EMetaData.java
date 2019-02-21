@@ -2,7 +2,7 @@ package fr.elasticsearch.data;
 
 public enum EMetaData {
     TITRE("titre"),
-    CONTENU("description"),
+    CONTENU("contenu"),
     AUTEUR("auteur"),
     MOT_CLE("motCle");
 

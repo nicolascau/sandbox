@@ -26,42 +26,46 @@ public class DocumentData {
 
         // PUT
         // IST DATA
-        parameters.put(EMetaData.TITRE.name(), "GY-COMSUP-EMIA-DIVOPS-J3AIR 002 MSG");
-        parameters.put(EMetaData.CONTENU.name(), new Date());
-        parameters.put(EMetaData.AUTEUR.name(), "2019-02-13_DR_DGA_TITLE");
-        parameters.put(EMetaData.MOT_CLE.name(), "GY COMSUP MOYENS AERIENS");
+        parameters.put(EMetaData.TITRE.name(), "DOC_001_Titre du document");
+        parameters.put(EMetaData.CONTENU.name(), "Description du document 001");
+        parameters.put(EMetaData.AUTEUR.name(), "Dupont");
+        parameters.put(EMetaData.MOT_CLE.name(), "Document Test Kibana");
 
         success = es.putData(index, type, id, parameters);
         logger.info("putData : success " + success);
 
         // 2ND DATA
         parameters.clear();
-        parameters.put(EMetaData.TITRE.name(), "GY-COMSUP-EMIA-DIVOPS-J3AIR 002 MSG");
-        parameters.put(EMetaData.CONTENU.name(), new Date());
-        parameters.put(EMetaData.AUTEUR.name(), "2019-02-13_DR_DGA_TITLE");
-        parameters.put(EMetaData.MOT_CLE.name(), "GY COMSUP MOYENS AERIENS");
+        parameters.put(EMetaData.TITRE.name(), "DOC_002_Titre du document Word");
+        parameters.put(EMetaData.CONTENU.name(), "Description du document 002 (au format autre que PDF)");
+        parameters.put(EMetaData.AUTEUR.name(), "Durant");
+        parameters.put(EMetaData.MOT_CLE.name(), "Document Test Word");
 
-        success = es.putData(index, type, "2", parameters);
+        id = "2";
+        success = es.putData(index, type, id, parameters);
         logger.info("putData : success " + success);
 
         // 3RD DATA
         parameters.clear();
-        parameters.put(EMetaData.TITRE.name(), "GY-COMSUP-EMIA-DIVOPS-J3AIR 002 MSG");
-        parameters.put(EMetaData.CONTENU.name(), new Date());
-        parameters.put(EMetaData.AUTEUR.name(), "2019-02-13_DR_DGA_TITLE");
-        parameters.put(EMetaData.MOT_CLE.name(), "GY COMSUP MOYENS AERIENS");
+        parameters.put(EMetaData.TITRE.name(), "DOC_003_Titre du document PDF");
+        parameters.put(EMetaData.CONTENU.name(), "Description du document 003 (au format PDF)");
+        parameters.put(EMetaData.AUTEUR.name(), "Dupont");
+        parameters.put(EMetaData.MOT_CLE.name(), "Document PDF");
 
-        success = es.putData(index, type, "3", parameters);
+        id = "3";
+        success = es.putData(index, type, id, parameters);
         logger.info("putData : success " + success);
 
         // GET
+        id = "1";
         Map<String, Object> data = es.getData(index, type, id);
         logger.info("getData : data.entrySet().size() " + data.entrySet().size());
 
 
         // UPDATE
+        id = "1";
         parameters.clear();
-        parameters.put(EMetaData.CONTENU.name(), "Cesson-Sévigné");
+        parameters.put(EMetaData.CONTENU.name(), "Description du document 001 après une mise à jour");
 
         success = es.updateData(index, type, id, parameters);
         logger.info("updateData : success " + success);
@@ -69,7 +73,7 @@ public class DocumentData {
 
         // SEARCH
         parameters.clear();
-        parameters.put(EMetaData.CONTENU.name(), "NP");
+        parameters.put(EMetaData.AUTEUR.name(), "Dupont");
 
         SearchHits hits = es.searchData(index, parameters);
         logger.info("searchData : hits.totalHits " + hits.getTotalHits());
@@ -83,8 +87,8 @@ public class DocumentData {
         }
 
         parameters.clear();
-        parameters.put(EMetaData.CONTENU.name(), "test");
-        parameters.put(EMetaData.MOT_CLE.name(), "MOYENS");
+        parameters.put(EMetaData.MOT_CLE.name(), "PDF");
+        parameters.put(EMetaData.CONTENU.name(), "PDF");
 
         hits = es.searchData(index, parameters);
         logger.info("searchData : hits.totalHits " + hits.getTotalHits());
@@ -100,7 +104,7 @@ public class DocumentData {
 
         // DELETE BULK
         parameters.clear();
-        parameters.put(EMetaData.AUTEUR.name(), "Paris");
+        parameters.put(EMetaData.AUTEUR.name(), "Dupont");
 
         success = es.deleteData(index, parameters);
         logger.info("deleteData : success " + success);
