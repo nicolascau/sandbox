@@ -4,16 +4,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'mvn install'
+                // echo 'Building..'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh 'mvn test'
+                // echo 'Testing..'
             }
         }
         stage('Deploy') {
             steps {
+                // sh 'cp ./toto C:\toto'
                 echo 'Deploying....'
             }
         }
