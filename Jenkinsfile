@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // sh 'cp ./toto C:\toto'
-                echo 'Deploying....'
+                // echo 'Deploying....'
             }
         }
     }
